@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "个人博客"
+title: "Personal Blog"
 date:   2026-1-20
 tags: [geek]
 comments: true
