@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Personal Blog"
+title: "个人博客"
 date:   2026-1-20
 tags: [geek]
 comments: true
 author: tuxnode
 ---
 
-# 关于我
+# 关于
 
 I'm TuxNode, a computer science major student.
 
@@ -16,6 +16,7 @@ Passionate and interested in free software.
 
 [My Github](https://www.github.com/tuxnode "GitHub Page")
 
+<!-- more -->
 
 # 自由软件的拥护者
 
