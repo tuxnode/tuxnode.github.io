@@ -16,6 +16,8 @@ Passionate and interested in free software.
 
 [My Github](https://www.github.com/tuxnode "GitHub Page")
 
+<!-- more -->
+
 # 自由软件的拥护者
 
 I have to admit that it's hard to get started using *Free Software*,
