@@ -22,7 +22,7 @@ Passionate and interested in free software.
 
 I have to admit that it's hard to get started using *Free Software*,
 
-also, fsf is not prevalent to used for work or creation.
+also, FSF(Free Software) is not prevalent to used for work or creation.
 
 However, free software has significant implications for breaking monopolies and closures.
 
