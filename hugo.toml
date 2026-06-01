@@ -1,7 +1,7 @@
 baseURL = "https://tuxnode.github.io/"
 title = "Geek's Tech Base"
 paginate = 5
-theme = "PaperMod"
+theme = "hugo-coder"
 
 [markup]
   [markup.highlight]
