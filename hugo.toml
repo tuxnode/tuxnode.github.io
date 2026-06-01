@@ -13,30 +13,27 @@ theme = "hugo-coder"
   title = "My Code Sandbox"
   description = "Low-level systems, computer architecture, and security research"
   colorScheme = "dark"
+  author = "TuxNode"
+  info = "Low-level systems & security"
 
-  [params.homeInfoParams]
-    Title = "Hello, World! 🚀"
-    Content = "Low-level systems programming, kernel security, and hardcore hacking."
+[[params.social]]
+  name = "Github"
+  icon = "fa-brands fa-github fa-2x"
+  weight = 1
+  url = "https://github.com/tuxnode"
 
-  [[params.socialIcons]]
-    name = "github"
-    url = "https://github.com/tuxnode"
+[[params.social]]
+  name = "Email"
+  icon = "fa-solid fa-envelope fa-2x"
+  weight = 2
+  url = "mailto:tuxnode@outlook.com"
 
-  [[params.socialIcons]]
-    name = "email"
-    url = "mailto:tuxnode@outlook.com"
+[[menu.main]]
+  name = "Blog"
+  url = "/posts/"
+  weight = 10
 
-  [[params.menu.main]]
-    name = "Archives"
-    url = "/archives/"
-    weight = 10
-
-  [[params.menu.main]]
-    name = "Search"
-    url = "/search/"
-    weight = 20
-
-  [[params.menu.main]]
-    name = "Tags"
-    url = "/tags/"
-    weight = 30
+[[menu.main]]
+  name = "Tags"
+  url = "/tags/"
+  weight = 20
