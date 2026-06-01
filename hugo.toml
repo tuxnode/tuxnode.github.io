@@ -1,0 +1,42 @@
+baseURL = "https://tuxnode.github.io/"
+title = "Geek's Tech Base"
+paginate = 5
+theme = "PaperMod"
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    style = "monokai"
+
+[params]
+  env = "production"
+  title = "My Code Sandbox"
+  description = "Low-level systems, computer architecture, and security research"
+  defaultTheme = "auto"
+
+  [params.homeInfoParams]
+    Title = "Hello, World! 🚀"
+    Content = "Low-level systems programming, kernel security, and hardcore hacking."
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/tuxnode"
+
+  [[params.socialIcons]]
+    name = "email"
+    url = "mailto:tuxnode@outlook.com"
+
+  [[params.menu.main]]
+    name = "Archives"
+    url = "/archives/"
+    weight = 10
+
+  [[params.menu.main]]
+    name = "Search"
+    url = "/search/"
+    weight = 20
+
+  [[params.menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 30
