@@ -12,7 +12,7 @@ theme = "hugo-coder"
   env = "production"
   title = "My Code Sandbox"
   description = "Low-level systems, computer architecture, and security research"
-  defaultTheme = "auto"
+  colorScheme = "dark"
 
   [params.homeInfoParams]
     Title = "Hello, World! 🚀"
