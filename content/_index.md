@@ -1,5 +1,5 @@
 +++
-portraitImage = "/portrait.png"
+portraitImage = "/tux.jpg"
 
 introTitle = "TuxNode"
 introBody = "Low-level systems, computer architecture, and security research. A free software enthusiast and Arch Linux user."
