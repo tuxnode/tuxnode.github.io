@@ -43,6 +43,39 @@
   padding-top: 0;
 }
 
+/* ── Assembly-Specific Effects (Terminal Green) ─ */
+.highlight:has(code[data-lang="asm"]) {
+  border-color: #2a5a2a;
+  background: #0d1b0d;
+  box-shadow: inset 0 0 40px rgba(0, 255, 0, 0.04);
+}
+
+.highlight:has(code[data-lang="asm"]) code::before {
+  content: "asm";
+  background: #0d1b0d;
+  color: #4a9;
+  border-color: #2a5a2a;
+}
+
+code[data-lang="asm"] .chroma { color: #a0d0a0; }
+
+.highlight:has(code[data-lang="asm"]) .chroma,
+code[data-lang="asm"] {
+  color: #a0d0a0;
+}
+
+.highlight:has(code[data-lang="asm"]) .chroma .line::before {
+  color: #2a5a2a;
+  border-color: #1a3a1a;
+}
+
+.highlight:has(code[data-lang="asm"]) .chroma .nf { color: #ff6; }    /* Instructions */
+.highlight:has(code[data-lang="asm"]) .chroma .no { color: #6cf; }    /* Registers */
+.highlight:has(code[data-lang="asm"]) .chroma .mi { color: #f9a; }    /* Numbers */
+.highlight:has(code[data-lang="asm"]) .chroma .s { color: #8c8; }     /* Strings */
+.highlight:has(code[data-lang="asm"]) .chroma .c,
+.highlight:has(code[data-lang="asm"]) .chroma .c1 { color: #555; }    /* Comments */
+
 /* ── Chroma Syntax Colors (Monokai-inspired) ── */
 .chroma {
   color: #e6e6e6;
