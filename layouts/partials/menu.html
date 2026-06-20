@@ -1,0 +1,10 @@
+{{- $page := .page }}
+{{- $menuID := .menuID }}
+
+{{- with index site.Menus $menuID }}
+<nav>
+  <ul class="flex list-none m-0 p-0 gap-4">
+    {{- partial "menu-walk.html" (dict "page" $page "menuEntries" .) }}
+  </ul>
+</nav>
+{{- end }}

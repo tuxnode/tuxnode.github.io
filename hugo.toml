@@ -1,7 +1,7 @@
 baseURL = "https://tuxnode.github.io/"
 title = "Geek's Tech Base"
-paginate = 5
-theme = "hugo-coder"
+languageCode = "zh-CN"
+theme = "digio-theme"
 
 [markup]
   [markup.highlight]
@@ -10,30 +10,22 @@ theme = "hugo-coder"
 
 [params]
   env = "production"
-  title = "My Code Sandbox"
   description = "Low-level systems, computer architecture, and security research"
-  colorScheme = "dark"
-  author = "TuxNode"
-  info = "Low-level systems & security"
 
-[[params.social]]
-  name = "Github"
-  icon = "fa-brands fa-github fa-2x"
-  weight = 1
-  url = "https://github.com/tuxnode"
+[menus]
+  [[menus.main]]
+    name = 'home'
+    pageRef = '/'
+    weight = 1
+    [menus.main.params]
+      image = '/digigarden2025.png'
 
-[[params.social]]
-  name = "Email"
-  icon = "fa-solid fa-envelope fa-2x"
-  weight = 2
-  url = "mailto:tuxnode@outlook.com"
+  [[menus.main]]
+    name = 'posts'
+    pageRef = '/posts'
+    weight = 2
 
-[[menu.main]]
-  name = "Blog"
-  url = "/posts/"
-  weight = 10
-
-[[menu.main]]
-  name = "Tags"
-  url = "/tags/"
-  weight = 20
+  [[menus.main]]
+    name = 'me'
+    pageRef = '/me'
+    weight = 3

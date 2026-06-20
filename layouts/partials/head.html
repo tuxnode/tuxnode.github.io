@@ -1,21 +1,10 @@
-{{ partial "head/meta-tags.html" . }}
-
-{{ if .Params.canonicalUrl }}
-<link rel="canonical" href="{{ .Params.canonicalUrl }}">
-{{ else }}
-<link rel="canonical" href="{{ .Permalink }}">
-{{ end }}
-
-{{ partialCached "head/theme-styles.html" . }}
-
-{{ partialCached "head/color-scheme.html" . }}
-
-{{ partialCached "head/custom-styles.html" . }}
-
-{{ partialCached "head/custom-icons.html" . }}
-
-{{ partial "head/alternative-output-formats.html" . }}
-
-{{ if .IsHome }}{{ partial "head/hugo-generator.html" . }}{{ end }}
-
-{{ partial "head/extensions.html" . }}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Site.Title }}</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+</head>

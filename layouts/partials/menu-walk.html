@@ -1,0 +1,30 @@
+{{- $page := .page }}
+{{- range .menuEntries }}
+  {{- $attrs := dict "href" .URL }}
+  {{- $name := .Name }}
+  {{- with .Identifier }}
+    {{- with T . }}
+      {{- $name = . }}
+    {{- end }}
+  {{- end }}
+  <li>
+    <a class="text-sm"
+      {{- range $k, $v := $attrs }}
+        {{- with $v }}
+          {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+        {{- end }}
+      {{- end -}}
+    >
+      {{- if .Params.image }}
+        <img src="{{ .Params.image }}" alt="{{ $name }}">
+      {{- else }}
+        {{ $name }}
+      {{- end }}
+    </a>
+    {{- with .Children }}
+      <ul>
+        {{- partial "menu-walk.html" (dict "page" $page "menuEntries" .) }}
+      </ul>
+    {{- end }}
+  </li>
+{{- end }}
