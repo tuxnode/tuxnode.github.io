@@ -53,11 +53,11 @@
                     </h3>
 
                     {{ with $post.Params.teaser }}
-                    <p><em>{{ . }}</em></p>
+                    <p><em>{{ . | plainify | truncate 140 }}</em></p>
                     {{ else }} {{ with $post.Params.description }}
-                    <p><em>{{ . }}</em></p>
+                    <p><em>{{ . | plainify | truncate 140 }}</em></p>
                     {{ else }}
-                    <p><em>{{ $post.Summary }}</em></p>
+                    <p><em>{{ $post.Summary | plainify | truncate 140 }}</em></p>
                     {{ end }} {{ end }}
 
                     <span class="self-start text-sm text-white underline">
