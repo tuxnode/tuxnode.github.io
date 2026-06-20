@@ -1,0 +1,225 @@
+/* ───────────────────────────────────────────────
+   Digio Theme Custom Enhancements
+   Code blocks, Markdown, and visual effects
+   ─────────────────────────────────────────────── */
+
+/* ── Code Blocks ──────────────────────────────── */
+.highlight {
+  position: relative;
+  margin: 1.5rem 0;
+  border: 1px solid #333;
+  border-radius: 0;
+  background: #1a1a1a;
+  overflow-x: auto;
+}
+
+.highlight pre {
+  padding: 1rem;
+  margin: 0;
+  background: transparent;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Language label via data-lang attribute */
+.highlight code::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2px 10px;
+  font-size: 11px;
+  color: #666;
+  background: #111;
+  border-bottom: 1px solid #333;
+  border-left: 1px solid #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.highlight code {
+  display: block;
+  position: relative;
+  padding-top: 0;
+}
+
+/* ── Chroma Syntax Colors (Monokai-inspired) ── */
+.chroma {
+  color: #e6e6e6;
+}
+.chroma .k { color: #f92672; }      /* Keyword */
+.chroma .kc { color: #f92672; }     /* Keyword Constant */
+.chroma .kd { color: #f92672; }     /* Keyword Declaration */
+.chroma .kn { color: #f92672; }     /* Keyword Namespace */
+.chroma .kp { color: #f92672; }     /* Keyword Pseudo */
+.chroma .kr { color: #f92672; }     /* Keyword Reserved */
+.chroma .kt { color: #66d9ef; }     /* Keyword Type */
+.chroma .nb { color: #e6db74; }     /* Name Builtin */
+.chroma .bp { color: #e6db74; }     /* Name Builtin Pseudo */
+.chroma .nc { color: #a6e22e; }     /* Name Class */
+.chroma .no { color: #66d9ef; }     /* Name Constant */
+.chroma .nd { color: #a6e22e; }     /* Name Decorator */
+.chroma .nf { color: #a6e22e; }     /* Name Function */
+.chroma .nx { color: #a6e22e; }     /* Name Other */
+.chroma .nt { color: #f92672; }     /* Name Tag */
+.chroma .nv { color: #e6e6e6; }     /* Name Variable */
+.chroma .o { color: #f92672; }      /* Operator */
+.chroma .p { color: #888; }         /* Punctuation */
+.chroma .mi { color: #ae81ff; }     /* Literal Number Integer */
+.chroma .mf { color: #ae81ff; }     /* Literal Number Float */
+.chroma .mh { color: #ae81ff; }     /* Literal Number Hex */
+.chroma .s { color: #e6db74; }      /* Literal String */
+.chroma .s1 { color: #e6db74; }     /* Literal String Single */
+.chroma .s2 { color: #e6db74; }     /* Literal String Double */
+.chroma .ss { color: #e6db74; }     /* Literal String Symbol */
+.chroma .c { color: #75715e; }      /* Comment */
+.chroma .c1 { color: #75715e; }     /* Comment Single */
+.chroma .cm { color: #75715e; }     /* Comment Multiline */
+.chroma .cp { color: #75715e; }     /* Comment Preproc */
+.chroma .gd { color: #f92672; }     /* Generic Deleted */
+.chroma .ge { font-style: italic; } /* Generic Emph */
+.chroma .gh { color: #888; }        /* Generic Heading */
+.chroma .gi { color: #a6e22e; }     /* Generic Inserted */
+.chroma .gs { font-weight: bold; }  /* Generic Strong */
+.chroma .gu { color: #75715e; }     /* Generic Subheading */
+
+/* ── Inline Code ──────────────────────────────── */
+code:not(.chroma code):not(pre code) {
+  padding: 2px 6px;
+  font-size: 0.9em;
+  color: #f9a8d4;
+  background: #1a1a1a;
+  border: 1px solid #333;
+}
+
+/* ── Code Line Numbers ──────────────────────────── */
+.chroma .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 2.5em;
+  padding-right: 1em;
+  margin-right: 1em;
+  text-align: right;
+  color: #555;
+  border-right: 1px solid #2a2a2a;
+  user-select: none;
+}
+
+.chroma {
+  counter-reset: line;
+  padding-left: 0;
+}
+
+/* ── Blockquotes ──────────────────────────────── */
+blockquote {
+  position: relative;
+  margin: 1.5rem 0;
+  padding: 0.5rem 1.5rem;
+  border-left: 3px solid #f9a8d4;
+  background: rgba(249, 168, 212, 0.05);
+  font-style: italic;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Tables ───────────────────────────────────── */
+table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+table th,
+table td {
+  padding: 8px 12px;
+  border: 1px solid #333;
+  text-align: left;
+}
+
+table th {
+  color: #f9a8d4;
+  background: #1a1a1a;
+  font-weight: bold;
+}
+
+table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+table tr:hover {
+  background: rgba(249, 168, 212, 0.05);
+}
+
+/* ── Headings ─────────────────────────────────── */
+article h1,
+.flex-1 h1 {
+  position: relative;
+  padding-bottom: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #333;
+}
+
+article h2,
+.flex-1 h2 {
+  margin-top: 1.5rem;
+}
+
+/* ── Horizontal Rules ─────────────────────────── */
+hr {
+  position: relative;
+  height: 4px;
+  margin: 2rem 0;
+  border: none;
+  background: repeating-linear-gradient(
+    90deg,
+    #333,
+    #333 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+/* ── Task Lists (Checkboxes) ──────────────────── */
+input[type="checkbox"] {
+  margin-right: 6px;
+}
+
+/* ── Images in Content ────────────────────────── */
+.flex-1 img {
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+  border: 1px solid #333;
+}
+
+/* ── Lists ────────────────────────────────────── */
+.flex-1 ul li {
+  margin-bottom: 0.25rem;
+}
+
+.flex-1 ol li {
+  margin-bottom: 0.25rem;
+}
+
+/* ── Links in Content ─────────────────────────── */
+.flex-1 a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.flex-1 a:hover {
+  color: #f9a8d4;
+}
+
+/* ── Responsive Code Blocks ───────────────────── */
+@media (max-width: 768px) {
+  .highlight pre {
+    font-size: 12px;
+    padding: 0.75rem;
+  }
+}
