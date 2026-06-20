@@ -12,6 +12,18 @@ theme = "digio-theme"
   env = "production"
   description = "Low-level systems, computer architecture, and security research"
 
+  [params.giscus]
+    repo = "tuxnode/tuxnode.github.io"
+    repoId = "R_kgDOSubkiQ"
+    category = "Q&A"
+    categoryId = "DIC_kwDOSubkic4C_i3p"
+    mapping = "pathname"
+    strict = "0"
+    reactionsEnabled = "1"
+    emitMetadata = "0"
+    inputPosition = "bottom"
+    theme = "preferred_color_scheme"
+
 [menus]
   [[menus.main]]
     name = 'home'

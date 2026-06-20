@@ -9,6 +9,7 @@
       <div class="mt-6">
         {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
       </div>
+      {{ partial "comments.html" . }}
     </div>
     {{ $toc := .TableOfContents }}
     {{ if and $toc (ne $toc "<nav id=\"TableOfContents\"></nav>") }}
