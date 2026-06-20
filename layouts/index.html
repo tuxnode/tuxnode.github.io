@@ -14,12 +14,10 @@
 			{{ with $p.statusText }}<div>{{ . | markdownify }}</div>{{ end }}
 		</div>
 		<div class="not-prose flex cursor-default flex-col space-y-2 rounded-lg border border-white p-6">
-			<img src="{{ or $p.watchingImage "/watching.png" }}" alt="Watching" class="self-start">
-			{{ if or $p.watchingUrl $p.watchingText }}
+			<img src="/contribute.png" alt="GitHub" class="self-start">
+			{{ with $p.githubUrl }}
 				<p class="underline">
-					{{ if $p.watchingUrl }}<a href="{{ $p.watchingUrl }}">{{ end }}
-					{{ or $p.watchingText "" }}
-					{{ if $p.watchingUrl }}</a>{{ end }}
+					<a href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ . }}</a>
 				</p>
 			{{ end }}
 		</div>
