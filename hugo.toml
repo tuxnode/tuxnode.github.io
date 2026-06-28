@@ -11,6 +11,7 @@ theme = "digio-theme"
 [params]
   env = "production"
   description = "Low-level systems, computer architecture, and security research"
+  email = "tuxnode@outlook.com"
 
   [params.giscus]
     repo = "tuxnode/tuxnode.github.io"
