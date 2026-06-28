@@ -8,4 +8,5 @@ statusImage = "/status.png"
 statusText = "Exploring low-level systems & computer architecture"
 
 githubUrl = "https://github.com/tuxnode"
+email = "tuxnode@outlook.com"
 +++
