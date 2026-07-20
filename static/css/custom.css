@@ -3,6 +3,29 @@
    Code blocks, Markdown, and visual effects
    ─────────────────────────────────────────────── */
 
+/* ── Typography & Layout ──────────────────────── */
+body {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+/* Wider content area */
+.mx-auto.w-full.max-w-4xl {
+  max-width: 72rem; /* 1152px instead of 896px */
+}
+
 /* ── Code Blocks ──────────────────────────────── */
 .highlight {
   position: relative;
