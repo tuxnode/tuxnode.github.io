@@ -42,3 +42,8 @@ theme = "digio-theme"
     name = 'me'
     pageRef = '/me'
     weight = 3
+
+  [[menus.main]]
+    name = 'friends'
+    pageRef = '/friends'
+    weight = 4
