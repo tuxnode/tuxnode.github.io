@@ -264,12 +264,22 @@ input[type="checkbox"] {
 
 /* ── Links in Content ─────────────────────────── */
 .flex-1 a {
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  color: #9cf0a8;
+  background-color: rgba(126, 231, 135, 0.22);
+  box-shadow: inset 0 0 0 1px rgba(126, 231, 135, 0.45);
+  padding: 1px 6px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.flex-1 a:hover {
-  color: #f9a8d4;
+.flex-1 a:hover:not(.not-prose) {
+  color: #0d1b0d !important;
+  background-color: rgba(126, 231, 135, 0.92);
+}
+
+.flex-1 a:hover::after {
+  content: " →";
 }
 
 /* ── Responsive Code Blocks ───────────────────── */
