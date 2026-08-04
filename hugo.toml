@@ -1,0 +1,31 @@
+baseURL = "https://tuxnode.fun/"
+title = "Geek's Tech Base"
+languageCode = "zh-CN"
+theme = "digio-theme"
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    style = "monokai"
+
+[params]
+  env = "production"
+  description = "Low-level systems, computer architecture, and security research"
+
+[menus]
+  [[menus.main]]
+    name = 'home'
+    pageRef = '/'
+    weight = 1
+    [menus.main.params]
+      image = '/digigarden2025.png'
+
+  [[menus.main]]
+    name = 'posts'
+    pageRef = '/posts'
+    weight = 2
+
+  [[menus.main]]
+    name = 'me'
+    pageRef = '/me'
+    weight = 3
