@@ -3,16 +3,20 @@
     typeof document.startViewTransition === 'function' &&
     !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function isInternalLink(a) {
-    if (a.target && a.target !== '_self') return false;
-    if (a.hasAttribute('download')) return false;
-    const href = a.getAttribute('href');
-    if (!href || href.startsWith('#')) return false;
-    const url = new URL(a.href, location.href);
-    if (url.origin !== location.origin) return false;
-    if (url.href === location.href) return false;
-    if (url.hash && url.pathname === location.pathname) return false;
-    return true;
+  let currentHref = location.href;
+
+  function scrollToHash(hash) {
+    const id = decodeURIComponent(hash.slice(1));
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView();
+    return el;
+  }
+
+  function samePageHashClick(url) {
+    return (
+      url.pathname + url.search ===
+      new URL(location.href).pathname + new URL(location.href).search
+    );
   }
 
   async function fetchPage(url) {
@@ -40,12 +44,41 @@
   }
 
   document.addEventListener('click', (e) => {
-    if (!supportsVT) return;
     const a = e.target.closest('a');
-    if (!a || !isInternalLink(a)) return;
+    if (!a) return;
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    e.preventDefault();
+
+    const href = a.getAttribute('href');
+    if (!href) return;
+
+    // TOC-style fragment links: scroll manually (reliable on SPA pages too)
+    if (href.startsWith('#')) {
+      const el = scrollToHash(href);
+      if (el) {
+        e.preventDefault();
+        history.pushState({}, '', href);
+      }
+      return;
+    }
+
+    if (a.target && a.target !== '_self') return;
+    if (a.hasAttribute('download')) return;
     const url = new URL(a.href, location.href);
+    if (url.origin !== location.origin) return;
+    if (url.href === location.href) return;
+
+    // internal link to current page with a hash: manual scroll
+    if (url.hash && samePageHashClick(url)) {
+      const el = scrollToHash(url.hash);
+      if (el) {
+        e.preventDefault();
+        history.pushState({}, '', url.pathname + url.search + url.hash);
+      }
+      return;
+    }
+
+    if (!supportsVT) return;
+    e.preventDefault();
 
     const transition = document.startViewTransition(async () => {
       const doc = await fetchPage(url.href);
@@ -57,9 +90,9 @@
     transition.finished
       .then(() => {
         history.pushState({}, '', url.pathname + url.search + url.hash);
+        currentHref = url.href;
         if (url.hash) {
-          const el = document.querySelector(url.hash);
-          if (el) el.scrollIntoView();
+          if (!scrollToHash(url.hash)) window.scrollTo(0, 0);
         } else {
           window.scrollTo(0, 0);
         }
@@ -70,14 +103,33 @@
   });
 
   window.addEventListener('popstate', () => {
+    // same document, only the hash changed (TOC back/forward): scroll only
+    if (
+      new URL(currentHref).pathname + new URL(currentHref).search ===
+      new URL(location.href).pathname + new URL(location.href).search
+    ) {
+      currentHref = location.href;
+      if (location.hash) scrollToHash(location.hash);
+      else window.scrollTo(0, 0);
+      return;
+    }
+
     if (!supportsVT) return;
     const transition = document.startViewTransition(async () => {
       const doc = await fetchPage(location.href);
       if (!swapContent(doc)) throw new Error('swap failed');
       runScripts();
-      window.scrollTo(0, 0);
+      if (location.hash) {
+        if (!scrollToHash(location.hash)) window.scrollTo(0, 0);
+      } else {
+        window.scrollTo(0, 0);
+      }
     });
 
-    transition.finished.catch(() => location.reload());
+    transition.finished
+      .then(() => {
+        currentHref = location.href;
+      })
+      .catch(() => location.reload());
   });
 })();
