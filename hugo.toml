@@ -8,6 +8,13 @@ theme = "digio-theme"
     noClasses = false
     style = "monokai"
 
+  [markup.goldmark.extensions.passthrough]
+    enable = true
+
+  [markup.goldmark.extensions.passthrough.delimiters]
+    block = [['\[', '\]'], ['$$', '$$']]
+    inline = [['\(', '\)'], ['$', '$']]
+
 [params]
   env = "production"
   description = "Low-level systems, computer architecture, and security research"
