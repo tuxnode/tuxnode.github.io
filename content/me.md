@@ -9,6 +9,7 @@ TuxNode - a computer science student passionate about low-level systems, compute
 - Arch Linux  
 - Computer Architecture
 - C / Low-level Programming
+- Rust Programming Language
 - Security Research
 - Minimalism
 - Vim / Neovim
