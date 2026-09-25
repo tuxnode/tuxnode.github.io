@@ -27,12 +27,20 @@ h3 {
 }
 
 /* ── Code Blocks ──────────────────────────────── */
+
+/* Let the content column shrink below its content width so wide code
+   blocks scroll horizontally instead of stretching/clipping the layout. */
+.flex > .flex-1 {
+  min-width: 0;
+}
+
 .highlight {
   position: relative;
   margin: 1.5rem 0;
   border: 1px solid #333;
   border-radius: 0;
   background: #1a1a1a;
+  max-width: 100%;
   overflow-x: auto;
 }
 
@@ -42,6 +50,29 @@ h3 {
   background: transparent;
   font-size: 13px;
   line-height: 1.6;
+}
+
+/* Always-visible horizontal scrollbar so long lines are discoverable */
+.highlight {
+  scrollbar-width: thin;
+  scrollbar-color: #444 #111;
+}
+
+.highlight::-webkit-scrollbar {
+  height: 9px;
+}
+
+.highlight::-webkit-scrollbar-track {
+  background: #111;
+  border-top: 1px solid #333;
+}
+
+.highlight::-webkit-scrollbar-thumb {
+  background: #444;
+}
+
+.highlight::-webkit-scrollbar-thumb:hover {
+  background: #666;
 }
 
 /* Language label via data-lang attribute */
@@ -62,7 +93,6 @@ h3 {
 
 .highlight code {
   display: block;
-  position: relative;
   padding-top: 0;
 }
 
