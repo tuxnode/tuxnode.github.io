@@ -75,6 +75,20 @@ h3 {
   background: #666;
 }
 
+/* Drag-to-scroll affordance for overflowing code blocks */
+.highlight.is-scrollable {
+  cursor: grab;
+}
+
+.highlight.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.highlight.is-dragging * {
+  user-select: none;
+}
+
 /* Language label via data-lang attribute */
 .highlight code::before {
   content: attr(data-lang);
