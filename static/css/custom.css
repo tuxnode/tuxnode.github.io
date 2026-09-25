@@ -254,6 +254,11 @@ table tr:hover {
   background: rgba(249, 168, 212, 0.05);
 }
 
+/* ── Table of Contents ────────────────────────── */
+.toc-container h4 {
+  white-space: nowrap;
+}
+
 /* ── Headings ─────────────────────────────────── */
 article h1,
 .flex-1 h1 {
