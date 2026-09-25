@@ -8,6 +8,11 @@ theme = "digio-theme"
     noClasses = false
     style = "monokai"
 
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = false
+
   [markup.goldmark.extensions.passthrough]
     enable = true
 
