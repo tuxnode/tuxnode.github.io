@@ -1,5 +1,5 @@
 ---
-title: "axum 路由设计：三层类型与一条边界"
+title: "axum 路由设计：三层类型与边界设计"
 date: 2026-11-06
 tags: ["rust", "axum", "web", "type-system", "design"]
 author: tuxnode
@@ -348,7 +348,7 @@ axum 的路由设计是一次职责切分：把「handler 需要什么」交给�
 ## 参考资料
 
 - [axum 0.8 路由文档](https://docs.rs/axum/0.8/axum/routing/index.html) —— `Router`、`MethodRouter`、`nest`、`merge`
-- [`Handler` trait](https://docs.rs/axum/0.8/axum/handler/trait.Handler.html) —— 提取器顺序与参数上限
-- [`FromRequestParts` 与 `FromRequest`](https://docs.rs/axum/0.8/axum/extract/index.html) —— 两类提取器的分工
-- [`Router::route_layer`](https://docs.rs/axum/0.8/axum/struct.Router.html#method.route_layer) —— 作用域差异
+- [Handler trait](https://docs.rs/axum/0.8/axum/handler/trait.Handler.html) —— 提取器顺序与参数上限
+- [FromRequestParts 与 FromRequest](https://docs.rs/axum/0.8/axum/extract/index.html) —— 两类提取器的分工
+- [Router::route_layer](https://docs.rs/axum/0.8/axum/struct.Router.html#method.route_layer) —— 作用域差异
 - [tower::Service](https://docs.rs/tower/latest/tower/trait.Service.html) —— `Router` 最终落成的抽象
