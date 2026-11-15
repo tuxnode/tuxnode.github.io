@@ -1,0 +1,17 @@
+# lychee link checker config
+# https://github.com/lycheeverse/lychee/blob/master/lychee.example.toml
+
+# 403 = 反爬拦截, 429 = 限流。两者都说明链接本身可达，不算死链。
+# 真正的失效通常是 404 / 410 / DNS 解析失败 / TLS 握手失败。
+accept = ["100..=103", "200..=299", "403", "429"]
+
+# 站点偶尔响应慢，多给几次重试机会；并发压到 10，避免被目标站拉黑。
+max_concurrency = 10
+max_retries = 3
+timeout = 30
+
+# 用正常浏览器 UA，很多站点（zhihu / stackoverflow / intel）会直接拒绝默认 UA。
+user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+
+# 不检查代码块里的 URL（lychee 默认就不查，这里显式写出来，避免以后误改）
+include_verbatim = false

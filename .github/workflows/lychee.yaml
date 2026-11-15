@@ -1,0 +1,111 @@
+name: Link check
+
+on:
+  push:
+    branches: ["master"]
+    paths:
+      - "content/**"
+      - ".lychee.toml"
+      - ".github/workflows/lychee.yaml"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: "link-check"
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  # 死链清单维护在这个 issue 上
+  DEAD_LINK_ISSUE: 4
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # fail: false —— 死链不阻塞流程，结果写进 issue
+      - name: Check links
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # root-dir 让 /pc.png 这类站内绝对路径对应到 static/ 下的文件
+          args: >-
+            --config .lychee.toml
+            --root-dir "$GITHUB_WORKSPACE/static"
+            --no-progress
+            './content/**/*.md'
+          fail: false
+          failIfEmpty: false
+          output: lychee/out.md
+          jobSummary: true
+          lycheeVersion: v0.24.2
+
+      - name: Update dead link issue
+        # fork PR 的 GITHUB_TOKEN 没有 issues:write，跳过
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          EXIT_CODE: ${{ steps.lychee.outputs.exit_code }}
+        run: |
+          set -euo pipefail
+
+          report="lychee/out.md"
+          [ -f "$report" ] || printf 'lychee 未产出报告，请检查 args / 配置。\n' > "$report"
+
+          now="$(date -u '+%Y-%m-%d %H:%M UTC')"
+          repo_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
+          run_url="${repo_url}/actions/runs/${GITHUB_RUN_ID}"
+
+          if [ "${EXIT_CODE:-0}" = "0" ]; then
+            status="✅ 没有发现死链"
+          else
+            # 从 summary 表格里取 Errors 计数
+            count="$(awk -F'|' '/Errors/ { gsub(/ /, "", $3); print $3; exit }' "$report")"
+            status="❌ 发现 ${count:-若干} 个死链"
+          fi
+
+          body="$(mktemp)"
+          {
+            echo "# 死链清单"
+            echo
+            echo "> 本 issue 由 [\`.github/workflows/lychee.yaml\`](${repo_url}/blob/master/.github/workflows/lychee.yaml) 自动维护，"
+            echo "> 每次运行会覆盖正文，请勿手动编辑。"
+            echo
+            echo "| 项目 | 值 |"
+            echo "| --- | --- |"
+            echo "| 结果 | ${status} |"
+            echo "| 提交 | [\`${GITHUB_SHA:0:7}\`](${repo_url}/commit/${GITHUB_SHA}) |"
+            echo "| 分支 | \`${GITHUB_REF_NAME}\` |"
+            echo "| 时间 | ${now} |"
+            echo "| 日志 | [Actions run](${run_url}) |"
+            echo
+            echo "<!-- report:start -->"
+            # 报告自带 `# Summary` 标题，降一级嵌进 issue 正文
+            sed -e 's/^### /#### /' -e 's/^## /### /' -e 's/^# /## /' "$report"
+            echo
+            echo "---"
+            echo "本地复现：\`lychee --root-dir \"\$PWD/static\" './content/**/*.md'\`"
+          } > "$body"
+
+          # 结果没变化就不动 issue，避免每次 push 都刷一条编辑记录
+          current="$(gh issue view "$DEAD_LINK_ISSUE" --json body --jq '.body' 2>/dev/null || true)"
+          current_tail="$(printf '%s\n' "$current" | sed '1,/<!-- report:start -->/d')"
+          new_tail="$(sed '1,/<!-- report:start -->/d' "$body")"
+          if [ -n "$current" ] && [ "$current_tail" = "$new_tail" ]; then
+            echo "死链结果没有变化，跳过更新 issue #${DEAD_LINK_ISSUE}"
+            exit 0
+          fi
+
+          gh issue edit "$DEAD_LINK_ISSUE" --body-file "$body"
+          echo "已更新 issue #${DEAD_LINK_ISSUE}: https://github.com/${GITHUB_REPOSITORY}/issues/${DEAD_LINK_ISSUE}"
